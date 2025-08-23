@@ -411,6 +411,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Auto-update footer year
+document.addEventListener('DOMContentLoaded', () => {
+    const yearSpan = document.getElementById('current-year');
+    if (yearSpan) {
+        const currentYear = new Date().getFullYear();
+        yearSpan.textContent = currentYear;
+    }
+});
+
 // Add loading animation
 window.addEventListener('load', () => {
     document.body.style.opacity = '0';
