@@ -340,23 +340,72 @@ window.addEventListener('scroll', throttle(() => {
     // Scroll-based animations
 }, 16)); // ~60fps
 
-// Photo stack click toggle for mobile/tablet
+// Photo stack auto-open and scroll behavior for mobile
 document.addEventListener('DOMContentLoaded', () => {
     const photoStack = document.querySelector('.photo-stack');
+    const aboutSection = document.querySelector('#about');
     
-    if (photoStack) {
+    if (photoStack && aboutSection) {
+        let hasVisitedSection = false;
+        let isUserInteraction = false;
+        
+        // Auto-open on first visit to about section (mobile only)
+        function checkAndAutoOpen() {
+            if (window.innerWidth <= 1024 && !hasVisitedSection) {
+                const rect = aboutSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    photoStack.classList.add('clicked');
+                    hasVisitedSection = true;
+                }
+            }
+        }
+        
+        // Auto-close when scrolling away (mobile only)
+        function checkAndAutoClose() {
+            if (window.innerWidth <= 1024 && hasVisitedSection && !isUserInteraction) {
+                const rect = aboutSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (!isVisible) {
+                    photoStack.classList.remove('clicked');
+                }
+            }
+        }
+        
+        // Click handler for manual control
         photoStack.addEventListener('click', function(e) {
-            // Only handle clicks on mobile/tablet (≤1024px)
             if (window.innerWidth <= 1024) {
+                isUserInteraction = true;
                 this.classList.toggle('clicked');
             }
-            // Desktop users (≥1025px) will use hover effect only
         });
         
-        // Reset clicked state when window is resized to desktop
+        // Scroll event for auto-close and auto-open
+        window.addEventListener('scroll', () => {
+            checkAndAutoClose();
+            checkAndAutoOpen(); // Also check for auto-open on scroll
+        });
+        
+        // Initial check for auto-open
+        setTimeout(() => {
+            checkAndAutoOpen();
+        }, 1000);
+        
+        // Also check when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkAndAutoOpen();
+            }, 500);
+        });
+        
+        // Reset states when resizing to desktop
         window.addEventListener('resize', () => {
             if (window.innerWidth > 1024) {
                 photoStack.classList.remove('clicked');
+                hasVisitedSection = false;
+                isUserInteraction = false;
             }
         });
     }
