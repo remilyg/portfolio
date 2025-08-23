@@ -620,15 +620,7 @@ section {
     left: 100px !important;
 }
 
-/* Mobile-specific default position - only when not clicked */
-@media (max-width: 1024px) {
-    .photo-stack:not(.clicked) .card-1,
-    .photo-stack:not(.clicked) .card-2,
-    .photo-stack:not(.clicked) .card-3 {
-        transform: none !important;
-        left: 100px !important;
-    }
-}
+
 
 
 
@@ -653,43 +645,25 @@ section {
 
 /* Click effect for mobile/tablet only */
 @media (max-width: 1024px) {
-
-    .photo-stack.clicked .card-1 {
-        transform: rotate(20deg) translateX(100px) !important;
+    .photo-stack.clicked .profile-photo.card-1 {
+        transform: rotate(12deg) translateX(60px) !important;
         z-index: 3 !important;
-        left: 120px !important;
+        left: 110px !important;
     }
 
-    .photo-stack.clicked .card-2 {
+    .photo-stack.clicked .profile-photo.card-2 {
         transform: rotate(0deg) translateX(0px) !important;
         z-index: 2 !important;
-        left: 120px !important;
+        left: 110px !important;
     }
 
-    .photo-stack.clicked .card-3 {
-        transform: rotate(-20deg) translateX(-100px) !important;
+    .photo-stack.clicked .profile-photo.card-3 {
+        transform: rotate(-12deg) translateX(-60px) !important;
         z-index: 1 !important;
-        left: 120px !important;
+        left: 110px !important;
     }
 
-    /* More specific selector to ensure it works */
-    div.photo-stack.clicked .card-1 {
-        transform: rotate(15deg) translateX(70px) !important;
-        z-index: 3 !important;
-        left: 115px !important;
-    }
 
-    div.photo-stack.clicked .card-2 {
-        transform: rotate(0deg) translateX(0px) !important;
-        z-index: 2 !important;
-        left: 115px !important;
-    }
-
-    div.photo-stack.clicked .card-3 {
-        transform: rotate(-15deg) translateX(-70px) !important;
-        z-index: 1 !important;
-        left: 115px !important;
-    }
 
     /* Disable hover effects on mobile to prevent conflicts */
     .photo-stack:hover .card-1,
@@ -698,8 +672,6 @@ section {
         transform: none !important;
         left: 100px !important;
     }
-
-
 
     /* Force click state to override all other states */
     .photo-stack.clicked .card-1,
@@ -1313,6 +1285,10 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Hide line breaks in contact-info on mobile */
+    .contact-info br {
+        display: none !important;
+    }
     .hamburger {
         display: flex;
     }
@@ -1419,7 +1395,7 @@ section {
         justify-content: center;
         align-items: center;
         position: relative;
-        left: 37.5%;
+        left: 36%;
         transform: translateX(-50%);
     }
 
@@ -1516,6 +1492,7 @@ section {
 
     .contact-content {
         grid-template-columns: 1fr;
+        padding: 0 16px;
     }
 
     .footer-content {
