@@ -293,7 +293,7 @@ body {
 
 @media (max-width: 768px) {
     .typing-text {
-        width: 285px !important;
+        width: 286px !important;
         font-size: 1.2rem;
     }
     
@@ -627,6 +627,11 @@ body {
 .project-links {
     display: flex;
     gap: 1rem;
+}
+
+.project-card[data-category="shopify"]:nth-child(2) .project-links {
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .project-link {
@@ -1346,8 +1351,14 @@ textarea.form-input {
     }
     
     .project-links {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         gap: 0.5rem;
+    }
+    
+    .project-link {
+        flex: 1 1 calc(50% - 0.25rem);
+        text-align: left;
     }
     
     .projects-filter {
