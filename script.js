@@ -326,9 +326,6 @@ class FormInteractions {
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
         
-        // Let the form submit naturally to Formspree
-        // The form will open in a new tab due to target="_blank"
-        
         // Reset button after a delay
         setTimeout(() => {
             submitButton.textContent = 'Send Message';
